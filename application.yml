@@ -12,7 +12,7 @@ SB:
 
 
 s3_conf:
-  s3_bucket: priysa-bucket
+  s3_bucket: anusha-spark
 
 sftp_conf:
     filetype: csv
