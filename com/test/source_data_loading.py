@@ -62,6 +62,15 @@ if __name__ == '__main__':
                 .partitionBy('ins_dt') \
                 .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + '/' + staging_loc + "/" + src)
 
+        if src == 'S3':
+            addr_df = ut.read_from_mongo(app_conf['mongodb_config'])
+            cp_df = ol_df.withColumn('ins_dt', current_date())
+            addr_df.show()
+            addr_df.write \
+                .mode('append') \
+                .partitionBy('ins_dt') \
+                .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + '/' + staging_loc + "/" + src)
+
 
 
 
