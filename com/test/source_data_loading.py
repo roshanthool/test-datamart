@@ -31,6 +31,7 @@ if __name__ == '__main__':
     src_list = app_conf['source_list']
     staging_loc = app_conf['staging_loc']
     for src in src_list:
+        print(src)
         src_conf = app_conf[src]
         if src == 'SB':
             print(app_secret['mysql_conf'])
