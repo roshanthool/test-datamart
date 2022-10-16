@@ -42,7 +42,13 @@ def read_from_mongo(mng_conf):
         .option("database", mng_conf["mongodb_config"]["database"]) \
         .option("collection", mng_conf["mongodb_config"]["collection"]) \
         .load()
+    return addr_df
 
-    addr_df.show()
-
-
+def read_from_s3(s3_conf,fin_schema):
+    cp_df = spark.read \
+        .option("header", "false") \
+        .option("delimiter", ",") \
+        .format("csv") \
+        .schema(fin_schema) \
+        .load("s3a://" + s3_conf["s3_conf"]["s3_bucket"] + "/finances.csv")
+    return cp_df

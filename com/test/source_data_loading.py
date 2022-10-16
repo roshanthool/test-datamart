@@ -1,5 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
+from pyspark.sql.types import StructType, IntegerType, BooleanType,DoubleType
 import yaml
 import os.path
 import com.utils.utilities as ut
@@ -58,25 +59,27 @@ if __name__ == '__main__':
 
         if src == 'ADDR':
             addr_df = ut.read_from_mongo(app_conf['mongodb_config'])
-            addr_df = ol_df.withColumn('ins_dt', current_date())
+            addr_df = addr_df.withColumn('ins_dt', current_date())
             addr_df.show()
             addr_df.write \
                 .mode('append') \
                 .partitionBy('ins_dt') \
                 .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + '/' + staging_loc + "/" + src)
 
-        if src == 'S3':
-            addr_df = ut.read_from_mongo(app_conf['mongodb_config'])
-            cp_df = ol_df.withColumn('ins_dt', current_date())
-            addr_df.show()
-            addr_df.write \
+        if src == 'CP':
+            fin_schema = StructType() \
+                .add("id", IntegerType(), True) \
+                .add("has_debt", BooleanType(), True) \
+                .add("has_financial_dependents", BooleanType(), True) \
+                .add("has_student_loans", BooleanType(), True) \
+                .add("income", DoubleType(), True)
+            cp_df = ut.read_from_s3(app_conf['s3_conf'],fin_schema)
+            cp_df = cp_df.withColumn('ins_dt', current_date())
+            cp_df.show()
+            cp_df.write \
                 .mode('append') \
                 .partitionBy('ins_dt') \
                 .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + '/' + staging_loc + "/" + src)
-
-
-
-
 
 
 # spark-submit --packages "mysql:mysql-connector-java:8.0.15" com/test/source_data_loading.py
