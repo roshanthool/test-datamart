@@ -73,7 +73,7 @@ if __name__ == '__main__':
                 .add("has_financial_dependents", BooleanType(), True) \
                 .add("has_student_loans", BooleanType(), True) \
                 .add("income", DoubleType(), True)
-            cp_df = ut.read_from_s3(src_conf,fin_schema)
+            cp_df = ut.read_from_s3(src_conf,fin_schema,spark)
             cp_df = cp_df.withColumn('ins_dt', current_date())
             cp_df.show()
             cp_df.write \
