@@ -81,5 +81,4 @@ if __name__ == '__main__':
                 .partitionBy('ins_dt') \
                 .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + '/' + staging_loc + "/" + src)
 
-
 # spark-submit --packages "mysql:mysql-connector-java:8.0.15" com/test/source_data_loading.py

@@ -15,6 +15,9 @@ CP:
   s3_conf:
     s3_bucket: anusha-spark
 
+s3_conf:
+  s3_bucket: anusha-spark
+
 sftp_conf:
     filetype: csv
     delimiter: |
