@@ -1,6 +1,6 @@
 import os.path
 def get_mysql_jdbc_url(mysql_config: dict):
-    print(mysql_config["mysql_conf"]["hostname"])
+    print(mysql_config)
     host = mysql_config["mysql_conf"]["hostname"]
     port = mysql_config["mysql_conf"]["port"]
     database = mysql_config["mysql_conf"]["database"]
