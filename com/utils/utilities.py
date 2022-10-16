@@ -7,6 +7,7 @@ def get_mysql_jdbc_url(mysql_config: dict):
 
 def read_from_mysql(mysql_secret, dbtable, partition_column, spark):
     print("\nReading data from MySQL DB,")
+    print(mysql_secret)
     jdbc_params = {"url": get_mysql_jdbc_url(mysql_secret),
                    "lowerBound": "1",
                    "upperBound": "100",
