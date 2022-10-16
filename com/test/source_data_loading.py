@@ -34,7 +34,8 @@ if __name__ == '__main__':
         if src == 'SB':
             txn_df = ut.read_from_mysql(app_secret['mysql_conf'],
                                         src_conf["mysql_conf"]["dbtable"],
-                                        src_conf["mysql_conf"]["partition_column"])
+                                        src_conf["mysql_conf"]["partition_column"],
+                                        spark)
             txn_df = txn_df.withColumn('ins_dt', current_date())
 
             txn_df.show()
