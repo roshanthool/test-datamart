@@ -32,7 +32,7 @@ if __name__ == '__main__':
     for src in src_list:
         src_conf = app_conf[src]
         if src == 'SB':
-            print(app_secret)
+            print(app_secret['mysql_conf'])
             txn_df = ut.read_from_mysql(app_secret['mysql_conf'],
                                         src_conf["mysql_conf"]["dbtable"],
                                         src_conf["mysql_conf"]["partition_column"],
