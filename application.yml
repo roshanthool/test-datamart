@@ -1,3 +1,19 @@
+
+source_list:
+  - SB
+  - OL
+  - CP
+  - ADDR
+
+staging_loc: staging
+
+SB:
+  mysql_conf:
+    dbtable: testdb.TRANSACTIONSYNC
+    partition_column: App_Transaction_Id
+    query : "(select * from testdb.TRANSACTIONSYNC where Internal_Member_Id = 'PC7135361') as t"
+
+
 s3_conf:
   s3_bucket: priysa-bucket
 
@@ -6,10 +22,6 @@ sftp_conf:
     delimiter: |
     directory: /home/ubuntu/data
 
-mysql_conf:
-  dbtable: testdb.TRANSACTIONSYNC
-  partition_column: App_Transaction_Id
-  query : "(select * from testdb.TRANSACTIONSYNC where Internal_Member_Id = 'PC7135361') as t"
 
 mongodb_config:
   database: school

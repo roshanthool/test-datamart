@@ -1,7 +1,8 @@
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
 import yaml
 import os.path
-import utils.aws_utils as ut
+import com.utils.utilities as ut
 
 if __name__ == '__main__':
 
@@ -26,3 +27,44 @@ if __name__ == '__main__':
     secret = open(app_secrets_path)
     app_secret = yaml.load(secret, Loader=yaml.FullLoader)
 
+    src_list = app_conf['source_list']
+    staging_loc = app_conf['staging_loc']
+    for src in src_list:
+        src_conf = app_conf[src]
+        if src == 'SB':
+            txn_df = ut.read_from_mysql(app_secret['mysql_conf'],
+                                        src_conf["mysql_conf"]["dbtable"],
+                                        src_conf["mysql_conf"]["partition_column"])
+            txn_df = txn_df.withColumn('ins_dt', current_date())
+
+            txn_df.show()
+            txn_df.write \
+                .mode('append') \
+                .partitionBy('ins_dt')\
+                .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + '/' + staging_loc + "/" + src)
+
+        if src == 'OL':
+           ol_df  = ut.read_from_sftp(app_secret['sftp_conf'],
+                                      current_dir + '/' + src_conf["sftp_conf"]['directory'])
+           ol_df = ol_df.withColumn('ins_dt', current_date())
+           ol_df.show()
+           ol_df.write \
+               .mode('append')\
+               .partitionBy('ins_dt') \
+               .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + '/' + staging_loc + "/" + src)
+
+        if src == 'ADDR':
+            addr_df = ut.read_from_mongo(app_conf['mongodb_config'])
+            addr_df = ol_df.withColumn('ins_dt', current_date())
+            addr_df.show()
+            addr_df.write \
+                .mode('append') \
+                .partitionBy('ins_dt') \
+                .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + '/' + staging_loc + "/" + src)
+
+
+
+
+
+
+# spark-submit --packages "mysql:mysql-connector-java:8.0.15" com/test/source_data_loading.py
