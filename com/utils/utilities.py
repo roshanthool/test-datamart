@@ -40,8 +40,8 @@ def read_from_mongo(mng_conf,spark):
     addr_df = spark \
         .read \
         .format("com.mongodb.spark.sql.DefaultSource") \
-        .option("database", mng_conf["mongodb_config"]["database"]) \
-        .option("collection", mng_conf["mongodb_config"]["collection"]) \
+        .option("database", mng_conf["database"]) \
+        .option("collection", mng_conf["collection"]) \
         .load()
     return addr_df
 
