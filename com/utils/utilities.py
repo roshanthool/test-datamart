@@ -24,6 +24,7 @@ def read_from_mysql(mysql_secret, dbtable, partition_column, spark):
     return df
 
 def read_from_sftp(sftp_secret, filename, spark):
+    print(os.path.abspath(dir + "/../../" + sftp_secret["pem"]))
     ol_txn_df = spark.read \
         .format("com.springml.spark.sftp") \
         .option("host", sftp_secret["hostname"]) \
