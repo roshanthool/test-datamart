@@ -32,16 +32,13 @@ if __name__ == '__main__':
     staging_loc = app_conf['staging_loc']
     for src in src_list:
         src_conf = app_conf[src]
+
         if src == 'SB':
-            print(app_secret['mysql_conf'])
-            print(src_conf["mysql_conf"])
             txn_df = ut.read_from_mysql(app_secret['mysql_conf'],
                                         src_conf["mysql_conf"]["dbtable"],
                                         src_conf["mysql_conf"]["partition_column"],
                                         spark)
             txn_df = txn_df.withColumn('ins_dt', current_date())
-
-            txn_df.show()
             txn_df.write \
                 .mode('append') \
                 .partitionBy('ins_dt')\

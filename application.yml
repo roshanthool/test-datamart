@@ -1,7 +1,8 @@
 
 source_list:
   #- SB
-  - CP
+  #- CP
+  - OL
 
 staging_loc: staging
 
