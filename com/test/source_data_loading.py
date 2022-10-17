@@ -45,7 +45,7 @@ if __name__ == '__main__':
                 .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + '/' + staging_loc + "/" + src)
 
         if src == 'OL':
-           print(os.path.abspath(current_dir + "/../../" + app_secret["sftp_conf"]["pem"]))
+           print(current_dir + '/' + src_conf["sftp_conf"]['directory'])
            ol_df  = ut.read_from_sftp(app_secret['sftp_conf'],
                                       current_dir + '/' + src_conf["sftp_conf"]['directory'],
                                       os.path.abspath(current_dir + "/../../" + app_secret["sftp_conf"]["pem"]),
