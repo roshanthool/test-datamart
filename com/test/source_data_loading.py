@@ -45,9 +45,9 @@ if __name__ == '__main__':
                 .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + '/' + staging_loc + "/" + src)
 
         if src == 'OL':
-           print(current_dir + '/' + src_conf["sftp_conf"]['directory'])
+           print(src_conf['directory'])
            ol_df  = ut.read_from_sftp(app_secret['sftp_conf'],
-                                      current_dir + '/' + src_conf["sftp_conf"]['directory'],
+                                      src_conf['directory'] + "/*",
                                       os.path.abspath(current_dir + "/../../" + app_secret["sftp_conf"]["pem"]),
                                       spark)
            ol_df = ol_df.withColumn('ins_dt', current_date())
