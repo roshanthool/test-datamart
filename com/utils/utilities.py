@@ -35,7 +35,7 @@ def read_from_sftp(sftp_secret, filename, pem, spark):
         .load(filename)
     return ol_txn_df
 
-def read_from_mongo(mng_conf):
+def read_from_mongo(mng_conf,spark):
     addr_df = spark \
         .read \
         .format("com.mongodb.spark.sql.DefaultSource") \

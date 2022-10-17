@@ -2,7 +2,8 @@
 source_list:
   #- SB
   #- CP
-  - OL
+  #- OL
+  - ADDR
 
 staging_loc: staging
 
@@ -25,10 +26,10 @@ OL:
       delimiter: |
       directory: /home/ubuntu/data
 
-
-mongodb_config:
-  database: school
-  collection: students
+ADDR:
+  mongodb_config:
+    database: school
+    collection: students
 
 redshift_conf:
   filetype: csv

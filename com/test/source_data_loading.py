@@ -59,7 +59,7 @@ if __name__ == '__main__':
                .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + '/' + staging_loc + "/" + src)
 
         if src == 'ADDR':
-            addr_df = ut.read_from_mongo(app_conf['mongodb_config'])
+            addr_df = ut.read_from_mongo(src_conf['mongodb_config'],spark)
             addr_df = addr_df.withColumn('ins_dt', current_date())
             addr_df.show()
             addr_df.write \
@@ -83,3 +83,6 @@ if __name__ == '__main__':
                 .parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + '/' + staging_loc + "/" + src)
 
 # spark-submit --packages "mysql:mysql-connector-java:8.0.15" com/test/source_data_loading.py
+
+# spark-submit --packages "org.mongodb.spark:mongo-spark-connector_2.11:2.4.1" com/test/source_data_loading.py
+
