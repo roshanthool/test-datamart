@@ -47,7 +47,7 @@ if __name__ == '__main__':
         if src == 'OL':
            ol_df  = ut.read_from_sftp(app_secret['sftp_conf'],
                                       current_dir + '/' + src_conf["sftp_conf"]['directory'],
-                                      os.path.abspath(dir + "/../../" + app_secret["sftp_conf"]["pem"]),
+                                      os.path.abspath(current_dir + "/../../" + app_secret["sftp_conf"]["pem"]),
                                       spark)
            ol_df = ol_df.withColumn('ins_dt', current_date())
            ol_df.show()
