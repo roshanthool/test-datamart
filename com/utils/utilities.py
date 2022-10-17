@@ -23,7 +23,7 @@ def read_from_mysql(mysql_secret, dbtable, partition_column, spark):
         .load()
     return df
 
-def read_from_sftp(sftp_secret, filename):
+def read_from_sftp(sftp_secret, filename, spark):
     ol_txn_df = spark.read \
         .format("com.springml.spark.sftp") \
         .option("host", sftp_secret["hostname"]) \
