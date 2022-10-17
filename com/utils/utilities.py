@@ -23,14 +23,13 @@ def read_from_mysql(mysql_secret, dbtable, partition_column, spark):
         .load()
     return df
 
-def read_from_sftp(sftp_secret, filename, spark):
-    print(os.path.abspath(dir + "/../../" + sftp_secret["pem"]))
+def read_from_sftp(sftp_secret, filename, pem, spark):
     ol_txn_df = spark.read \
         .format("com.springml.spark.sftp") \
         .option("host", sftp_secret["hostname"]) \
         .option("port", sftp_secret["port"]) \
         .option("username",sftp_secret["username"]) \
-        .option("pem", os.path.abspath(dir + "/../../" + sftp_secret["pem"])) \
+        .option("pem", pem) \
         .option("fileType", "csv") \
         .option("delimiter", "|") \
         .load(filename)
