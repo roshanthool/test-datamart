@@ -1,8 +1,8 @@
 
 source_list:
-  #- SB
-  #- CP
-  #- OL
+  - SB
+  - CP
+  - OL
   - ADDR
 
 staging_loc: staging
