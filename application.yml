@@ -40,6 +40,10 @@ redshift_conf:
   dbtable: PUBLIC.TXN_FCT
   query: SELECT txn_id, create_time, amount, cust_id from PUBLIC.TXN_FCT
 
+
+target_list:
+  - REGIS_DIM
+
 spark_sql_demo:
   agg_demo: >
     select
