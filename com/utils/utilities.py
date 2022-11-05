@@ -48,8 +48,8 @@ def read_from_mongo(mng_conf,spark):
 def read_from_s3(s3_conf,fin_schema,spark):
     cp_df = spark.read \
         .option("header", "false") \
-        .option("delimiter", ",") \
+        .option("delimiter", "|") \
         .format("csv") \
         .schema(fin_schema) \
-        .load("s3a://" + s3_conf["s3_conf"]["s3_bucket"] + "/finances.csv")
+        .load("s3a://" + s3_conf["s3_conf"]["s3_bucket"] + "/KC_Extract_1_20171009.csv")
     return cp_df
