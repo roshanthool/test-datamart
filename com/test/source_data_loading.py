@@ -75,8 +75,8 @@ if __name__ == '__main__':
                 .add("REGIS_ID", IntegerType(), True) \
                 .add("REGIS_LTY_ID", StringType(), True) \
                 .add("REGIS_CNSM_ID", StringType(), True) \
-                .add("REGIS_DATE", StringType(), True)
-                #.add("REGIS_TIME", StringType(), True) \
+                .add("REGIS_DATE", StringType(), True) \
+                .add("REGIS_TIME", StringType(), True)
                 #.add("REGIS_CHANNEL", StringType(), True) \
                 #.add("REGIS_GENDER", StringType(), True) \
                 #.add("REGIS_CITY", StringType(), True) \
