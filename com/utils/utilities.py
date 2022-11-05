@@ -47,7 +47,7 @@ def read_from_mongo(mng_conf,spark):
 
 def read_from_s3(s3_conf,fin_schema,spark):
     cp_df = spark.read \
-        .option("header", "false") \
+        .option("header", "true") \
         .option("delimiter", "|") \
         .format("csv") \
         .schema(fin_schema) \
