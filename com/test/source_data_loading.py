@@ -74,17 +74,17 @@ if __name__ == '__main__':
                 .add("REGIS_CTY_CODE", IntegerType(), True) \
                 .add("REGIS_ID", IntegerType(), True) \
                 .add("REGIS_LTY_ID", StringType(), True) \
-                .add("REGIS_CNSM_ID", StringType(), True)
-            #   .add("REGIS_DATE", StringType(), True) \
-            #    .add("REGIS_TIME", StringType(), True) \
-            #   .add("REGIS_CHANNEL", StringType(), True) \
-            #   .add("REGIS_GENDER", StringType(), True) \
-            #   .add("REGIS_CITY", StringType(), True) \
-            #   .add("CHILD_ID", IntegerType(), True) \
-            #   .add("CHILD_NB", IntegerType(), True) \
-            #   .add("CHILD_GENDER", StringType(), True) \
-            #    .add("CHILD_DOB", StringType(), True) \
-            #    .add("CHILD_DECEASED", StringType(), True)
+                .add("REGIS_CNSM_ID", StringType(), True) \
+                .add("REGIS_DATE", StringType(), True) \
+                .add("REGIS_TIME", StringType(), True) \
+                .add("REGIS_CHANNEL", StringType(), True) \
+                .add("REGIS_GENDER", StringType(), True) \
+                .add("REGIS_CITY", StringType(), True) \
+                .add("CHILD_ID", IntegerType(), True) \
+                .add("CHILD_NB", IntegerType(), True) \
+                .add("CHILD_GENDER", StringType(), True) \
+                .add("CHILD_DOB", StringType(), True) \
+                .add("CHILD_DECEASED", StringType(), True)
             cp_df = ut.read_from_s3(src_conf,fin_schema,spark)
             cp_df = cp_df.withColumn('ins_dt', current_date())
             cp_df.show()
