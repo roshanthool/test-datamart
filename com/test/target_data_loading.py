@@ -41,6 +41,7 @@ if __name__ == '__main__':
             df = spark.read.parquet("s3a://" + app_conf["s3_conf"]["s3_bucket"] + '/' + staging_loc + "/" + tgt_conf['source_data'] + "/")
             df.show()
             df.createOrReplaceTempView(tgt_conf['source_data'])
+            desc_df = spark.sql("describe tgt_conf['source_data']")
             res_df = spark.sql(tgt_conf['loadingQuery'])
             res_df.show()
 
