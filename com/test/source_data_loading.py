@@ -80,11 +80,11 @@ if __name__ == '__main__':
                 .add("REGIS_CHANNEL", StringType(), True) \
                 .add("REGIS_GENDER", StringType(), True) \
                 .add("REGIS_CITY", StringType(), True) \
-                .add("CHILD_ID", StringType(), True)
-                #.add("CHILD_NB", IntegerType(), True) \
-                #.add("CHILD_GENDER", StringType(), True) \
-                #.add("CHILD_DOB", StringType(), True) \
-                #.add("CHILD_DECEASED", StringType(), True)
+                .add("CHILD_ID", StringType(), True) \
+                .add("CHILD_NB", IntegerType(), True) \
+                .add("CHILD_GENDER", StringType(), True) \
+                .add("CHILD_DOB", StringType(), True) \
+                .add("CHILD_DECEASED", StringType(), True)
             cp_df = ut.read_from_s3(src_conf,fin_schema,spark)
             cp_df = cp_df.withColumn('ins_dt', current_date())
             cp_df.show()
