@@ -71,7 +71,7 @@ if __name__ == '__main__':
         if src == 'CP':
             fin_schema = StructType() \
                 .add("REGIS_CNTRY_CODE", StringType(), True) \
-                .add("REGIS_CTY_CODE", IntegerType(), True)
+                .add("REGIS_CTY_CODE", IntegerType(), True) \
                 .add("REGIS_ID", IntegerType(), True) \
                 .add("REGIS_LTY_ID", IntegerType(), True) \
                 .add("REGIS_CNSM_ID", IntegerType(), True)
