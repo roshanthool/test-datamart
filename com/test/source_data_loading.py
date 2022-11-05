@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
-from pyspark.sql.types import StructType, IntegerType, BooleanType,DoubleType
+from pyspark.sql.types import *
 import yaml
 import os.path
 import com.utils.utilities as ut
