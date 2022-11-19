@@ -18,10 +18,10 @@ SB:
 
 CP:
   s3_conf:
-    s3_bucket: spark
+    s3_bucket: roshan-bigdata
 
 s3_conf:
-  s3_bucket: spark
+  s3_bucket: roshan-bigdata
 
 OL:
   sftp_conf:
